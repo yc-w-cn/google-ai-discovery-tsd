@@ -1,4 +1,4 @@
-namespace methods {
+declare namespace methods {
   namespace things {
     type ICreateParams = { name?: string };
 

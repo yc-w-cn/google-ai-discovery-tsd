@@ -1,4 +1,4 @@
-namespace nested {
+declare namespace nested {
   namespace shallow {
     type ICreateParams = { name?: string };
   }

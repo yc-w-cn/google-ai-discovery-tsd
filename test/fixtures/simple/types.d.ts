@@ -1,7 +1,7 @@
 /**
  * A Simple API Schema
  */
-namespace simple {
+declare namespace simple {
   /**
    * A simple schema!
    */

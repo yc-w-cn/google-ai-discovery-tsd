@@ -1,7 +1,7 @@
 /**
  * A Complex API Schema
  */
-namespace complex {
+declare namespace complex {
   /**
    * A complex schema!
    */
