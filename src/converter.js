@@ -1,7 +1,5 @@
 'use strict';
 
-const entries = require('object.entries');
-
 class Converter {
   constructor(options) {
     this.options = options;
@@ -68,14 +66,17 @@ class Converter {
   toObject(props = {}, additional = false) {
     const fields = [];
 
-    for (const [name, prop] of entries(props)) {
-      const docs = prop.description ? this.toJSDoc(prop.description) : '';
-      const prefix = prop.readonly ? 'readonly ' : '';
-      const suffix = prop.required ? '' : '?';
-      const key = `${prefix}${name}${suffix}`;
-      const value = this.getType(prop);
-      fields.push(`${docs}${key}: ${value}`);
-    }
+    Object.keys(props)
+      .sort()
+      .forEach(name => {
+        const prop = props[name];
+        const docs = prop.description ? this.toJSDoc(prop.description) : '';
+        const prefix = prop.readonly ? 'readonly ' : '';
+        const suffix = prop.required ? '' : '?';
+        const key = `${prefix}${name}${suffix}`;
+        const value = this.getType(prop);
+        fields.push(`${docs}${key}: ${value}`);
+      });
 
     if (additional) {
       if (additional === true) additional = {type: 'any'};

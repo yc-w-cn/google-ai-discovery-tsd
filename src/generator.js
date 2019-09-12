@@ -1,6 +1,5 @@
 'use strict';
 
-const entries = require('object.entries');
 const isEmpty = require('lodash.isempty');
 const prettier = require('prettier');
 
@@ -13,7 +12,9 @@ class TypeGenerator {
     this.template = template('./templates/types.tmpl');
     this.name = json.name;
     this.title = json.title;
-    this.schemas = Object.values(json.schemas || {}, this);
+    this.schemas = Object.keys(json.schemas || {})
+      .sort()
+      .map(id => json.schemas[id]);
     this.resources = Resource.createResourceList(json.resources, this);
   }
   render() {
@@ -49,12 +50,15 @@ class Resource {
   static createResourceList(resources = {}, generator) {
     const list = [];
 
-    for (const [name, schema] of entries(resources)) {
-      const resource = new Resource(name, schema, generator);
-      if (!isEmpty(resource.methods) || !isEmpty(resource.resources)) {
-        list.push(resource);
-      }
-    }
+    Object.keys(resources)
+      .sort()
+      .forEach(name => {
+        const schema = resources[name];
+        const resource = new Resource(name, schema, generator);
+        if (!isEmpty(resource.methods) || !isEmpty(resource.resources)) {
+          list.push(resource);
+        }
+      });
 
     return list;
   }
@@ -80,23 +84,29 @@ class Method {
   static createMethodList(methods = {}, generator) {
     const list = [];
 
-    for (const [name, schema] of entries(methods)) {
-      const method = new Method(name, schema, generator);
-      if (!isEmpty(method.params)) {
-        list.push(method);
-      }
-    }
+    Object.keys(methods)
+      .sort()
+      .forEach(name => {
+        const schema = methods[name];
+        const method = new Method(name, schema, generator);
+        if (!isEmpty(method.params)) {
+          list.push(method);
+        }
+      });
 
     return list;
   }
   static getQueryParams(params = {}) {
     const queryParams = {};
 
-    for (const [name, param] of entries(params)) {
-      if (param.location !== 'path') {
-        queryParams[name] = param;
-      }
-    }
+    Object.keys(params)
+      .sort()
+      .forEach(name => {
+        const param = params[name];
+        if (param.location !== 'path') {
+          queryParams[name] = param;
+        }
+      });
 
     return queryParams;
   }
