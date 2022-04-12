@@ -72,6 +72,29 @@
               }
             }
           }
+        },
+        "repeated": {
+          "repeated": true,
+          "type": "string",
+          "enum": [
+            "done",
+            "pending",
+            "running"
+          ]
+        },
+        "nestedRepeated": {
+          "repeated": true,
+          "type": "object",
+          "properties": {
+            "nestedRepeatedProp": {
+              "repeated": true,
+              "type": "string",
+              "enum": [
+                "foo",
+                "bar"
+              ]
+            }
+          }
         }
       }
     },

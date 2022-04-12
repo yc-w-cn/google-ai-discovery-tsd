@@ -20,6 +20,11 @@ class Converter {
     return [type, ...refs].join('&');
   }
   getType(schema) {
+    let {repeated, ...schemaCopy} = schema;
+
+    if (repeated) {
+      return `Array<${this.getType(schemaCopy)}>`;
+    }
     if (schema.$ref) {
       return this.toTypeName(schema.$ref);
     }
