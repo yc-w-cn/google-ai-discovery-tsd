@@ -1,5 +1,5 @@
 {
-  "name": "google-ai-discovery-tsd",
+  "name": "@yc-w-cn/google-ai-discovery-tsd",
   "description": "Generates TypeScript declaration files from Google AI's Discovery API",
   "version": "0.0.1",
   "license": "ISC",
