@@ -1,14 +1,18 @@
 {
-  "name": "discovery-tsd",
-  "description": "Generates TypeScript declaration files from Google's Discovery API",
-  "version": "0.3.0",
+  "name": "google-ai-discovery-tsd",
+  "description": "Generates TypeScript declaration files from Google AI's Discovery API",
+  "version": "0.0.1",
   "license": "ISC",
-  "author": "Dave Gramlich <callmehiphop@gmail.com>",
+  "author": "Yuchen Wang <contact@wangyuchen.cn",
   "engines": {
     "node": ">= 8.0.0"
   },
-  "repository": "callmehiphop/discovery-tsd",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yc-w-cn/google-ai-discovery-tsd"
+  },
   "main": "src/index.js",
+  "homepage": "https://github.com/yc-w-cn/google-ai-discovery-tsd",
   "files": [
     "src",
     "README.md"
@@ -17,6 +21,8 @@
     "dtsd": "src/cli.js"
   },
   "keywords": [
+    "ai",
+    "gemini",
     "google",
     "discovery",
     "api",
@@ -24,12 +30,14 @@
     "typescript"
   ],
   "scripts": {
+    "generativelanguage:v1": "node src/cli.js v1 your_key_here > ./output/generativelanguage-v1.d.ts",
+    "generativelanguage:v1beta": "node src/cli.js v1beta your_key_here  > ./output/generativelanguage-v1beta.d.ts",
     "lint": "eslint ./{src,test}/*.js",
     "prettier": "prettier --write ./{src,test}/*.js",
     "test": "ava test/*.js --verbose"
   },
   "dependencies": {
-    "got": "^9.6.0",
+    "axios": "^1.6.5",
     "lodash.isempty": "^4.4.0",
     "lodash.template": "^4.4.0",
     "meow": "^5.0.0",

@@ -13,15 +13,15 @@ const readFile = pify(fs.readFile);
 test('createTypes', async t => {
   t.plan(1);
 
-  const types = await createTypes('bigquery', 'v2');
-  t.regex(types, /namespace bigquery \{/);
+  const types = await createTypes('v1', 'your_key_here');
+  t.regex(types, /namespace generativelanguage \{/);
 });
 
 test('fetch', async t => {
   t.plan(1);
 
-  const json = await fetch('bigquery', 'v2');
-  t.is(json.name, 'bigquery');
+  const json = await fetch('v1', 'your_key_here');
+  t.is(json.name, 'generativelanguage');
 });
 
 test('render - simple', async t => {

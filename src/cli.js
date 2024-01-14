@@ -6,10 +6,10 @@ const createTypes = require('./');
 const {input, flags} = meow(
   `
   Usage
-    $ dtsd <api> <version>
+    $ dtsd <version> <key>
 
   Examples
-    $ dtsd bigquery v2 > bigquery.d.ts
+    $ dtsd v2 your_key_here > generativelanguage.d.ts
 `,
   {
     flags: {}

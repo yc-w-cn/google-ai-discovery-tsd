@@ -1,17 +1,20 @@
 'use strict';
 
-const got = require('got');
+const axios = require('axios');
 const TypeGenerator = require('./generator');
 
-async function createTypes(api, version) {
-  const json = await fetch(api, version);
+async function createTypes(version, key) {
+  const json = await fetch(version, key);
   return render(json);
 }
 
-async function fetch(api, version) {
-  const url = `https://www.googleapis.com/discovery/v1/apis/${api}/${version}/rest`;
-  const response = await got(url, {json: true});
-  return response.body;
+/**
+ * @see {@link https://ai.google.dev/api/rest?hl=en}
+ */
+async function fetch(version, key) {
+  const url = `https://generativelanguage.googleapis.com/$discovery/rest?version=${version}&key=${key}`;
+  const response = await axios(url);
+  return response.data;
 }
 
 function render(json, options) {
